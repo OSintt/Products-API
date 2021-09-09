@@ -10,6 +10,14 @@ const userSchema = new Schema({
 		type: String,
 		required: true
 	},
+	likedProducts: [{
+		ref: "Product",
+		type: Schema.Types.ObjectId
+	}],
+	comments: [{
+		ref: "Comment",
+		type: Schema.Types.ObjectId
+	}],
 	role: [
 		{
 			ref: "Role",

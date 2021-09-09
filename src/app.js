@@ -6,7 +6,7 @@ const app = express();
 
 //settings
 const corsConfig = {
-    origin: "https://discord.com",
+    origin: "*",
     optionsSuccessStatus: 200
 }
 app.set("port", process.env.PORT || 3001);
@@ -20,14 +20,12 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 //routes
-app.use("/api/doxes", require('./routes/doxes'));
-app.use("/api/raids", require('./routes/raids'));
-app.use('/api/auth', require('./routes/auth'));
-app.use("/api/tks", require('./routes/tokens'));
+app.use("/v1/products", require('./routes/products'));
+app.use('/v1/auth', require('./routes/auth'));
+app.use('/v1/users', require('./routes/users'));
 
 app.use((req, res, next) => {
-    const error = new Error('Page not found');
-    error.status = 404;
+    return res.status(404).json({status: 404, message: "Page not found"})
     next();
 });
 
